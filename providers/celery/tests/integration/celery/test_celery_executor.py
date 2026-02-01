@@ -199,8 +199,24 @@ class TestCeleryExecutor:
                     TaskInstanceKey("id", "fail", "abc", 0, -1),
                 ]
                 for w in (
-                    workloads.ExecuteTask.model_construct(ti=ti),
-                    workloads.ExecuteTask.model_construct(ti=ti.model_copy(update={"task_id": "fail"})),
+                    workloads.ExecuteTask.model_construct(
+                        ti=ti,
+                        token="token",
+                        dag_rel_path="dag_rel_path",
+                        bundle_info=None,
+                        log_path="log_path",
+                        dag_version_id=uuid7(),
+                        pools_slot=123,
+                    ),
+                    workloads.ExecuteTask.model_construct(
+                        ti=ti.model_copy(update={"task_id": "fail"}),
+                        token="token",
+                        dag_rel_path="dag_rel_path",
+                        bundle_info=None,
+                        log_path="log_path",
+                        dag_version_id=uuid7(),
+                        pools_slot=123,
+                    ),
                 ):
                     executor.queue_workload(w, session=None)
 
