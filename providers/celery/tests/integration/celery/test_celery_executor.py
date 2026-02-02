@@ -129,7 +129,7 @@ class TestCeleryExecutor:
         db.clear_db_jobs()
 
 
-def setup_dagrun(dag_maker):
+def setup_dagrun_with_success_and_fail_tasks(dag_maker):
     date = timezone.utcnow()
     start_date = date - timedelta(days=2)
 
@@ -211,7 +211,7 @@ def setup_dagrun(dag_maker):
                     TaskInstanceKey("id", "success", "abc", 0, -1),
                     TaskInstanceKey("id", "fail", "abc", 0, -1),
                 ]
-                dagrun = setup_dagrun(dag_maker)
+                dagrun = setup_dagrun_with_success_and_fail_tasks(dag_maker)
                 ti_success, ti_fail = dagrun.task_instances
                 for w in (
                     workloads.ExecuteTask.make(
