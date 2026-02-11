@@ -361,6 +361,12 @@ It will run prek hooks automatically before committing and stops the commit on f
   cd ~/Projects/airflow
   prek uninstall
 
+9. You can also update the tools installed with UV, including prek
+
+.. code-block:: bash
+
+  uv tool upgrade --all
+
 - For more information on this visit |08_static_code_checks.rst|
 
 .. |08_static_code_checks.rst| raw:: html
